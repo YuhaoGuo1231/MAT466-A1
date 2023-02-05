@@ -1,0 +1,190 @@
+---
+title: "cov matrix"
+author: "Yuhao Guo"
+date: "2023/2/4"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(stringr)
+library(tidyverse)
+```
+
+```{r}
+YTM_data<-read.csv(file = "YTM_data_ad.csv", header = T)
+```
+
+```{r}
+X_11<-log(YTM_data$Jan_17[1]/YTM_data$Jan_16[1])
+X_12<-log(YTM_data$Jan_18[1]/YTM_data$Jan_17[1])
+X_13<-log(YTM_data$Jan_19[1]/YTM_data$Jan_18[1])
+X_14<-log(YTM_data$Jan_20[1]/YTM_data$Jan_19[1])
+X_15<-log(YTM_data$Jan_23[1]/YTM_data$Jan_20[1])
+X_16<-log(YTM_data$Jan_24[1]/YTM_data$Jan_23[1])
+X_17<-log(YTM_data$Jan_25[1]/YTM_data$Jan_24[1])
+X_18<-log(YTM_data$Jan_26[1]/YTM_data$Jan_25[1])
+X_19<-log(YTM_data$Jan_27[1]/YTM_data$Jan_26[1])
+
+x_1 <-c(X_11, X_12, X_13, X_14, X_15, X_16, X_17, X_18, X_19)
+```
+
+
+```{r}
+X_21<-log(YTM_data$Jan_17[2]/YTM_data$Jan_16[2])
+X_22<-log(YTM_data$Jan_18[2]/YTM_data$Jan_17[2])
+X_23<-log(YTM_data$Jan_19[2]/YTM_data$Jan_18[2])
+X_24<-log(YTM_data$Jan_20[2]/YTM_data$Jan_19[2])
+X_25<-log(YTM_data$Jan_23[2]/YTM_data$Jan_20[2])
+X_26<-log(YTM_data$Jan_24[2]/YTM_data$Jan_23[2])
+X_27<-log(YTM_data$Jan_25[2]/YTM_data$Jan_24[2])
+X_28<-log(YTM_data$Jan_26[2]/YTM_data$Jan_25[2])
+X_29<-log(YTM_data$Jan_27[2]/YTM_data$Jan_26[2])
+
+x_2 <-c(X_21, X_22, X_23, X_24, X_25, X_26, X_27, X_28, X_29)
+```
+
+```{r}
+X_31<-log(YTM_data$Jan_17[3]/YTM_data$Jan_16[3])
+X_32<-log(YTM_data$Jan_18[3]/YTM_data$Jan_17[3])
+X_33<-log(YTM_data$Jan_19[3]/YTM_data$Jan_18[3])
+X_34<-log(YTM_data$Jan_20[3]/YTM_data$Jan_19[3])
+X_35<-log(YTM_data$Jan_23[3]/YTM_data$Jan_20[3])
+X_36<-log(YTM_data$Jan_24[3]/YTM_data$Jan_23[3])
+X_37<-log(YTM_data$Jan_25[3]/YTM_data$Jan_24[3])
+X_38<-log(YTM_data$Jan_26[3]/YTM_data$Jan_25[3])
+X_39<-log(YTM_data$Jan_27[3]/YTM_data$Jan_26[3])
+
+x_3 <-c(X_31, X_32, X_33, X_34, X_35, X_36, X_37, X_38, X_39)
+```
+
+
+```{r}
+X_41<-log(YTM_data$Jan_17[4]/YTM_data$Jan_16[4])
+X_42<-log(YTM_data$Jan_18[4]/YTM_data$Jan_17[4])
+X_43<-log(YTM_data$Jan_19[4]/YTM_data$Jan_18[4])
+X_44<-log(YTM_data$Jan_20[4]/YTM_data$Jan_19[4])
+X_45<-log(YTM_data$Jan_23[4]/YTM_data$Jan_20[4])
+X_46<-log(YTM_data$Jan_24[4]/YTM_data$Jan_23[4])
+X_47<-log(YTM_data$Jan_25[4]/YTM_data$Jan_24[4])
+X_48<-log(YTM_data$Jan_26[4]/YTM_data$Jan_25[4])
+X_49<-log(YTM_data$Jan_27[4]/YTM_data$Jan_26[4])
+
+x_4 <-c(X_41, X_42, X_43, X_44, X_45, X_46, X_47, X_48, X_49)
+```
+
+```{r}
+X_51<-log(YTM_data$Jan_17[5]/YTM_data$Jan_16[5])
+X_52<-log(YTM_data$Jan_18[5]/YTM_data$Jan_17[5])
+X_53<-log(YTM_data$Jan_19[5]/YTM_data$Jan_18[5])
+X_54<-log(YTM_data$Jan_20[5]/YTM_data$Jan_19[5])
+X_55<-log(YTM_data$Jan_23[5]/YTM_data$Jan_20[5])
+X_56<-log(YTM_data$Jan_24[5]/YTM_data$Jan_23[5])
+X_57<-log(YTM_data$Jan_25[5]/YTM_data$Jan_24[5])
+X_58<-log(YTM_data$Jan_26[5]/YTM_data$Jan_25[5])
+X_59<-log(YTM_data$Jan_27[5]/YTM_data$Jan_26[5])
+x_5 <-c(X_51, X_52, X_53, X_54, X_55, X_56, X_57, X_58, X_59)
+```
+
+```{r}
+cov_data<-data.frame(X_1 = x_1, X_2= x_2, X_3 = x_3, X_4 = x_4, X_5=x_5)
+```
+
+```{r}
+YTM_cov_matrix<-cov(cov_data)
+print(YTM_cov_matrix)
+```
+
+```{r}
+FWR_data<-read.csv(file = "Forward rate_ad.csv", header = T)
+```
+
+```{r}
+Y_11<-log(FWR_data$Jan_17[1]/FWR_data$Jan_16[1])
+Y_12<-log(FWR_data$Jan_18[1]/FWR_data$Jan_17[1])
+Y_13<-log(FWR_data$Jan_19[1]/FWR_data$Jan_18[1])
+Y_14<-log(FWR_data$Jan_20[1]/FWR_data$Jan_19[1])
+Y_15<-log(FWR_data$Jan_23[1]/FWR_data$Jan_20[1])
+Y_16<-log(FWR_data$Jan_24[1]/FWR_data$Jan_23[1])
+Y_17<-log(FWR_data$Jan_25[1]/FWR_data$Jan_24[1])
+Y_18<-log(FWR_data$Jan_26[1]/FWR_data$Jan_25[1])
+Y_19<-log(FWR_data$Jan_27[1]/FWR_data$Jan_26[1])
+
+y_1 <-c(Y_11, Y_12, Y_13, Y_14, Y_15, Y_16, Y_17, Y_18, Y_19)
+```
+
+
+```{r}
+Y_21<-log(FWR_data$Jan_17[2]/FWR_data$Jan_16[2])
+Y_22<-log(FWR_data$Jan_18[2]/FWR_data$Jan_17[2])
+Y_23<-log(FWR_data$Jan_19[2]/FWR_data$Jan_18[2])
+Y_24<-log(FWR_data$Jan_20[2]/FWR_data$Jan_19[2])
+Y_25<-log(FWR_data$Jan_23[2]/FWR_data$Jan_20[2])
+Y_26<-log(FWR_data$Jan_24[2]/FWR_data$Jan_23[2])
+Y_27<-log(FWR_data$Jan_25[2]/FWR_data$Jan_24[2])
+Y_28<-log(FWR_data$Jan_26[2]/FWR_data$Jan_25[2])
+Y_29<-log(FWR_data$Jan_27[2]/FWR_data$Jan_26[2])
+
+y_2 <-c(Y_21, Y_22, Y_23, Y_24, Y_25, Y_26, Y_27, Y_28, Y_29)
+```
+
+
+```{r}
+Y_31<-log(FWR_data$Jan_17[3]/FWR_data$Jan_16[3])
+Y_32<-log(FWR_data$Jan_18[3]/FWR_data$Jan_17[3])
+Y_33<-log(FWR_data$Jan_19[3]/FWR_data$Jan_18[3])
+Y_34<-log(FWR_data$Jan_20[3]/FWR_data$Jan_19[3])
+Y_35<-log(FWR_data$Jan_23[3]/FWR_data$Jan_20[3])
+Y_36<-log(FWR_data$Jan_24[3]/FWR_data$Jan_23[3])
+Y_37<-log(FWR_data$Jan_25[3]/FWR_data$Jan_24[3])
+Y_38<-log(FWR_data$Jan_26[3]/FWR_data$Jan_25[3])
+Y_39<-log(FWR_data$Jan_27[3]/FWR_data$Jan_26[3])
+
+y_3 <-c(Y_31, Y_32, Y_33, Y_34, Y_35, Y_36, Y_37, Y_38, Y_39)
+```
+
+
+```{r}
+Y_41<-log(FWR_data$Jan_17[4]/FWR_data$Jan_16[4])
+Y_42<-log(FWR_data$Jan_18[4]/FWR_data$Jan_17[4])
+Y_43<-log(FWR_data$Jan_19[4]/FWR_data$Jan_18[4])
+Y_44<-log(FWR_data$Jan_20[4]/FWR_data$Jan_19[4])
+Y_45<-log(FWR_data$Jan_23[4]/FWR_data$Jan_20[4])
+Y_46<-log(FWR_data$Jan_24[4]/FWR_data$Jan_23[4])
+Y_47<-log(FWR_data$Jan_25[4]/FWR_data$Jan_24[4])
+Y_48<-log(FWR_data$Jan_26[4]/FWR_data$Jan_25[4])
+Y_49<-log(FWR_data$Jan_27[4]/FWR_data$Jan_26[4])
+
+y_4 <-c(Y_41, Y_42, Y_43, Y_44, Y_45, Y_46, Y_47, Y_48, Y_49)
+```
+
+
+```{r}
+cov_data_2<-data.frame(Y_1 = y_1, Y_2= y_2, Y_3 = y_3, Y_4 = y_4)
+```
+
+```{r}
+FWR_cov_matrix<-cov(cov_data_2)
+print(FWR_cov_matrix)
+```
+
+```{r}
+X_ev<- eigen(YTM_cov_matrix)
+print(X_ev$values)
+```
+```{r}
+print(X_ev$vectors)
+```
+
+```{r}
+Y_ev<- eigen(FWR_cov_matrix)
+print(Y_ev$values)
+```
+
+```{r}
+print(Y_ev$vectors)
+```
+
