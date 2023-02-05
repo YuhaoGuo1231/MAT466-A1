@@ -1,0 +1,44 @@
+---
+title: "YTM"
+author: "Yuhao Guo"
+date: "2023/2/2"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(stringr)
+library(tidyverse)
+```
+
+
+```{r}
+YTM<-read.csv(file = "YTM_data.csv", header = T)
+```
+
+```{r}
+YTM<-YTM %>%
+  mutate(Date = as.Date(Year))
+```
+
+
+```{r, fig.width=16, fig.height=7}
+plot(YTM$Date, YTM$Jan_16, type = "l",xaxt = "n", xlab="Year", ylab = "YTM", col=1)
+axis(1, YTM$Date, format(YTM$Date, "%Y-%m-%d"))
+lines(YTM$Date, YTM$Jan_17, type = "l", col=2)
+lines(YTM$Date, YTM$Jan_18, type = "l", col=3)
+lines(YTM$Date, YTM$Jan_19, type = "l", col=4)
+lines(YTM$Date, YTM$Jan_20, type = "l", col=5)
+lines(YTM$Date, YTM$Jan_23, type = "l", col=6)
+lines(YTM$Date, YTM$Jan_24, type = "l", col=7)
+lines(YTM$Date, YTM$Jan_25, type = "l", col=8)
+lines(YTM$Date, YTM$Jan_26, type = "l", col=9)
+lines(YTM$Date, YTM$Jan_27, type = "l", col=10)
+legend("topright",
+       legend = c("JAN_16", "JAN_17", "JAN_18", "JAN_19", "JAN_20", "JAN_23", "JAN_24", "JAN_25", "JAN_26", "JAN_27"),col = c(1,2,3,4,5,6,7,8,9,10), lwd = 2)
+
+```
+
