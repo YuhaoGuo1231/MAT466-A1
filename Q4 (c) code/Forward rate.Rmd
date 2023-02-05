@@ -1,0 +1,37 @@
+---
+title: "Forward Rate"
+author: "Yuhao Guo"
+date: "2023/2/4"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(stringr)
+library(tidyverse)
+```
+
+```{r}
+Forward_data<-read.csv(file = "Forward rate.csv", header = T)
+```
+
+
+```{r, fig.width=12, fig.height=6}
+plot(Forward_data$Value, Forward_data$Jan_16, type = "l", xlab="Forward rate 1 yr ~ j yr, e.g. 11.0: Forward rate 1 yr ~ 1 yr; 13.5: Forward rate 1yr ~ 3.5yr", ylab = "Forward rate", col=1)
+lines(Forward_data$Value, Forward_data$Jan_17, type = "l",col=2)
+lines(Forward_data$Value, Forward_data$Jan_18, type = "l",col=3)
+lines(Forward_data$Value, Forward_data$Jan_19, type = "l",col=4)
+lines(Forward_data$Value, Forward_data$Jan_20, type = "l",col=5)
+lines(Forward_data$Value, Forward_data$Jan_23, type = "l",col=6)
+lines(Forward_data$Value, Forward_data$Jan_24, type = "l",col=7)
+lines(Forward_data$Value, Forward_data$Jan_25, type = "l",col=8)
+lines(Forward_data$Value, Forward_data$Jan_26, type = "l",col=9)
+lines(Forward_data$Value, Forward_data$Jan_27, type = "l",col=10)
+legend("topright",
+       legend = c("JAN_16", "JAN_17", "JAN_18", "JAN_19", "JAN_20", "JAN_23", "JAN_24", "JAN_25", "JAN_26", "JAN_27"),col = c(1,2,3,4,5,6,7,8,9,10), lwd = 2)
+
+```
+

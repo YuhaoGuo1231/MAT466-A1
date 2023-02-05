@@ -1,0 +1,147 @@
+---
+title: "Forward"
+author: "Yuhao Guo"
+date: "2023/2/3"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(stringr)
+library(tidyverse)
+```
+
+```{r}
+SP_data<-read.csv(file = "Spot_data_ad.csv", header = T)
+```
+
+```{r}
+s<-c('1','2')
+s<-append(s,10)
+print(s)
+```
+
+
+
+```{r}
+F_11 <- c()
+for (i in 1:5){
+    t_1=((44-i+1)/365)+1
+    f_11 = (SP_data$X2025M1[i]*(t_1+1) - SP_data$X2024M1[i]*t_1 )/1
+    F_11 <- append(F_11, f_11)
+}
+
+for (i in 6:10){
+    t_1=((44-i+1-2)/365)+1
+    f_11 = (SP_data$X2025M1[i]*(t_1+1) - SP_data$X2024M1[i]*t_1 )/1
+    F_11 <- append(F_11, f_11)
+}
+
+print(F_11)
+  
+```
+```{r}
+F_11.5 <- c()
+for (i in 1:5){
+    t_1=((44-i+1)/365)+1
+    f_11.5 = (SP_data$X2025S1[i]*(t_1+1.5) - SP_data$X2024M1[i]*t_1 )/1.5
+    F_11.5 <- append(F_11.5, f_11.5)
+}
+
+for (i in 6:10){
+    t_1=((44-i+1-2)/365)+1
+    f_11.5 = (SP_data$X2025S1[i]*(t_1+1.5) - SP_data$X2024M1[i]*t_1 )/1.5
+    F_11.5 <- append(F_11.5, f_11.5)
+}
+
+print(F_11.5)
+```
+```{r}
+F_12 <- c()
+for (i in 1:5){
+    t_1=((44-i+1)/365)+1
+    f_12 = (SP_data$X2026M1[i]*(t_1+2) - SP_data$X2024M1[i]*t_1 )/2
+    F_12 <- append(F_12, f_12)
+}
+
+for (i in 6:10){
+    t_1=((44-i+1-2)/365)+1
+    f_12 = (SP_data$X2026M1[i]*(t_1+2) - SP_data$X2024M1[i]*t_1 )/2
+    F_12 <- append(F_12, f_12)
+}
+
+print(F_12)
+```
+```{r}
+F_12.5 <- c()
+for (i in 1:5){
+    t_1=((44-i+1)/365)+1
+    f_12.5 = (SP_data$X2026S1[i]*(t_1+2.5) - SP_data$X2024M1[i]*t_1 )/2.5
+    F_12.5 <- append(F_12.5, f_12.5)
+}
+
+for (i in 6:10){
+    t_1=((44-i+1-2)/365)+1
+    f_12.5 = (SP_data$X2026S1[i]*(t_1+2.5) - SP_data$X2024M1[i]*t_1 )/2.5
+    F_12.5 <- append(F_12.5, f_12.5)
+}
+
+print(F_12.5)
+```
+```{r}
+F_13 <- c()
+for (i in 1:5){
+    t_1=((44-i+1)/365)+1
+    f_13 = (SP_data$X2027M1[i]*(t_1+3) - SP_data$X2024M1[i]*t_1 )/3
+    F_13 <- append(F_13, f_13)
+}
+
+for (i in 6:10){
+    t_1=((44-i+1-2)/365)+1
+    f_13 = (SP_data$X2027M1[i]*(t_1+3) - SP_data$X2024M1[i]*t_1 )/3
+    F_13 <- append(F_13, f_13)
+}
+
+print(F_13)
+```
+```{r}
+F_13.5 <- c()
+for (i in 1:5){
+    t_1=((44-i+1)/365)+1
+    f_13.5 = (SP_data$X2027S1[i]*(t_1+3.5) - SP_data$X2024M1[i]*t_1 )/3.5
+    F_13.5 <- append(F_13.5, f_13.5)
+}
+
+for (i in 6:10){
+    t_1=((44-i+1-2)/365)+1
+    f_13.5 = (SP_data$X2027S1[i]*(t_1+3.5) - SP_data$X2024M1[i]*t_1 )/3.5
+    F_13.5 <- append(F_13.5, f_13.5)
+}
+
+print(F_13.5)
+```
+```{r}
+F_14 <- c()
+for (i in 1:5){
+    t_1=((44-i+1)/365)+1
+    f_14 = (SP_data$X2028M1[i]*(t_1+4) - SP_data$X2024M1[i]*t_1 )/4
+    F_14 <- append(F_14, f_14)
+}
+
+for (i in 6:10){
+    t_1=((44-i+1-2)/365)+1
+    f_14 = (SP_data$X2028M1[i]*(t_1+4) - SP_data$X2024M1[i]*t_1 )/4
+    F_14 <- append(F_14, f_14)
+}
+
+print(F_14)
+```
+
+
+
+
+
+
