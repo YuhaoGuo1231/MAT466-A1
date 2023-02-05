@@ -1,0 +1,105 @@
+---
+title: "SP-Jan-24"
+author: "Yuhao Guo"
+date: "2023/2/3"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(stringr)
+library(tidyverse)
+```
+
+```{r}
+data<-read.csv(file = "A1_Bond_data.csv", header = T)
+```
+
+```{r}
+data_24 <- data %>%
+  select(name, Coupon, days, c_since_days, c_next_days, Jan_24)
+
+data_24<- data_24%>%
+  mutate(dirty_price = ((c_since_days + 8)/365)*100*Coupon + Jan_24,
+         FV=100 + 0.5*100*Coupon)
+```
+
+```{r}
+c_0 = 0.5*data_24$Coupon[1]*100
+t_0 = (data_24$days[1] -8) /365
+r_0 = (-log(data_24$dirty_price[1]/data_24$FV[1]))/t_0
+print(r_0)
+```
+```{r}
+c_0.5 = 0.5*data_24$Coupon[2]*100
+t_sp = (data_24$c_next_days[2]-8) / 365
+t_0.5 = (data_24$days[2]-8)/365
+ct_0.5 = c_0.5*exp(-r_0*t_sp)
+r_0.4 = -(log((data_24$dirty_price[2] - ct_0.5)/data_24$FV[2])/(t_0.5))
+k=(r_0 - r_0.4)/(t_0 - t_0.5)
+b = r_0 - k*t_0
+r_0.5 = k*(t_0 + 0.5) + b
+print(r_0.5)
+```
+
+```{r}
+c_1 = 0.5*data_24$Coupon[3]*100
+ct_1 = c_1*(exp(-r_0*t_0)+exp(-r_0.5*(t_0+0.5)))
+r_1 = -(log((data_24$dirty_price[3] - ct_1)/data_24$FV[3])/(t_0+1))
+print(r_1)
+```
+
+```{r}
+c_1.5 = 0.5*data_24$Coupon[4]*100
+ct_1.5 = c_1.5*(exp(-r_0*t_0)+exp(-r_0.5*(t_0+0.5))+exp(-r_1*(t_0+1)))
+r_1.5 = -(log((data_24$dirty_price[4] - ct_1.5)/data_24$FV[4])/(t_0+1.5))
+print(r_1.5)
+```
+```{r}
+c_2 = 0.5*data_24$Coupon[5]*100
+ct_2 = c_2*(exp(-r_0*t_0)+exp(-r_0.5*(t_0+0.5))+exp(-r_1*(t_0+1))+exp(-r_1.5*(t_0+1.5)))
+r_2 = -(log((data_24$dirty_price[5] - ct_2)/data_24$FV[5])/(t_0+2))
+print(r_2)
+```
+```{r}
+c_2.5 = 0.5*data_24$Coupon[6]*100
+ct_2.5 = c_2.5*(exp(-r_0*t_0)+exp(-r_0.5*(t_0+0.5))+exp(-r_1*(t_0+1))+exp(-r_1.5*(t_0+1.5))+exp(-r_2*(t_0+2)))
+r_2.5 = -(log((data_24$dirty_price[6] - ct_2.5)/data_24$FV[6])/(t_0+2.5))
+print(r_2.5)
+```
+
+```{r}
+c_3 = 0.5*data_24$Coupon[7]*100
+ct_3 = c_3*(exp(-r_0*t_0)+exp(-r_0.5*(t_0+0.5))+exp(-r_1*(t_0+1))+exp(-r_1.5*(t_0+1.5))+exp(-r_2*(t_0+2))+exp(-r_2.5*(t_0+2.5)))
+r_3 = -(log((data_24$dirty_price[7] - ct_3)/data_24$FV[7])/(t_0+3))
+print(r_3)
+```
+
+```{r}
+c_3.5 = 0.5*data_24$Coupon[8]*100
+ct_3.5 = c_3.5*(exp(-r_0*t_0)+exp(-r_0.5*(t_0+0.5))+exp(-r_1*(t_0+1))+exp(-r_1.5*(t_0+1.5))+exp(-r_2*(t_0+2))+exp(-r_2.5*(t_0+2.5))+exp(-r_3*(t_0+3)))
+r_3.5 = -(log((data_24$dirty_price[8] - ct_3.5)/data_24$FV[8])/(t_0+3.5))
+print(r_3.5)
+```
+```{r}
+c_4 = 0.5*data_24$Coupon[9]*100
+ct_4 = c_4*(exp(-r_0*t_0)+exp(-r_0.5*(t_0+0.5))+exp(-r_1*(t_0+1))+exp(-r_1.5*(t_0+1.5))+exp(-r_2*(t_0+2))+exp(-r_2.5*(t_0+2.5))+exp(-r_3*(t_0+3))+exp(-r_3.5*(t_0+3.5)))
+r_4= -(log((data_24$dirty_price[9] - ct_4)/data_24$FV[9])/(t_0+4))
+print(r_4)
+```
+
+```{r}
+c_4.5 = 0.5*data_24$Coupon[10]*100
+ct_4.5 = c_4.5*(exp(-r_0*t_0)+exp(-r_0.5*(t_0+0.5))+exp(-r_1*(t_0+1))+exp(-r_1.5*(t_0+1.5))+exp(-r_2*(t_0+2))+exp(-r_2.5*(t_0+2.5))+exp(-r_3*(t_0+3))+exp(-r_3.5*(t_0+3.5))+exp(-r_4*(t_0+4)))
+r_4.5= -(log((data_24$dirty_price[10] - ct_4.5)/data_24$FV[10])/(t_0+4.5))
+print(r_4.5)
+```
+```{r}
+c_5 = 0.5*data_24$Coupon[11]*100
+ct_5 = c_5*(exp(-r_0*t_0)+exp(-r_0.5*(t_0+0.5))+exp(-r_1*(t_0+1))+exp(-r_1.5*(t_0+1.5))+exp(-r_2*(t_0+2))+exp(-r_2.5*(t_0+2.5))+exp(-r_3*(t_0+3))+exp(-r_3.5*(t_0+3.5))+exp(-r_4*(t_0+4))+exp(-r_4.5*(t_0+4.5)))
+r_5= -(log((data_24$dirty_price[11] - ct_5)/data_24$FV[11])/(t_0+5))
+print(r_5)
+```

@@ -1,0 +1,42 @@
+---
+title: "SP-Curve"
+author: "Yuhao Guo"
+date: "2023/2/3"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(stringr)
+library(tidyverse)
+```
+
+```{r}
+SP<-read.csv(file = "Spot_data.csv", header = T)
+```
+
+```{r}
+SP<-SP %>%
+  mutate(Date = as.Date(Year))
+```
+
+```{r, fig.width=16, fig.height=7}
+plot(SP$Date, SP$Jan_16, type = "l",xaxt = "n", xlab="Year", ylab = "Spot rate", col=1)
+axis(1, SP$Date, format(SP$Date, "%Y-%m-%d"))
+lines(SP$Date, SP$Jan_17, type = "l",col=2)
+lines(SP$Date, SP$Jan_18, type = "l", col=3)
+lines(SP$Date, SP$Jan_19, type = "l", col=4)
+lines(SP$Date, SP$Jan_20, type = "l", col=5)
+lines(SP$Date, SP$Jan_23, type = "l", col=6)
+lines(SP$Date, SP$Jan_24, type = "l", col=7)
+lines(SP$Date, SP$Jan_25, type = "l", col=8)
+lines(SP$Date, SP$Jan_26, type = "l", col=9)
+lines(SP$Date, SP$Jan_27, type = "l", col=10)
+legend("topright",
+       legend = c("JAN_16", "JAN_17", "JAN_18", "JAN_19", "JAN_20", "JAN_23", "JAN_24", "JAN_25", "JAN_26", "JAN_27"),col = c(1,2,3,4,5,6,7,8,9,10), lwd = 2)
+```
+
+
